@@ -1,6 +1,6 @@
 const prefix = 'agenda-shell-';
-const version = prefix + 'v2';
-const shell = ['./', './index.html', './manifest.webmanifest', './icons/agenda-192.png', './icons/agenda-512.png', './icons/apple-touch-icon.png'];
+const version = prefix + 'v3';
+const shell = ['./', './index.html', './portada.css', './manifest.webmanifest', './icons/agenda-192.png', './icons/agenda-512.png', './icons/apple-touch-icon.png'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(version).then(cache => cache.addAll(shell)));

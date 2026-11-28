@@ -629,6 +629,7 @@
     color:var(--ink); font:inherit;
   }
 </style>
+<link rel="stylesheet" href="./portada.css">
 </head>
 <body>
 <div id="app">
@@ -2268,6 +2269,7 @@ window.addEventListener('resize', () => {
   let client;
   let owner;
   let mode = 'login';
+  const booksEntryKey = 'agenda.openBooksAfterLogin';
   const loginAnimation = element('loginAnimation');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let animation;
@@ -2406,8 +2408,19 @@ window.addEventListener('resize', () => {
     catch { pending = {}; }
     setData({ ...Object.fromEntries(data.map(row => [row.collection, row.payload])), ...pending });
     element('activeProfile').textContent = user.email ?? 'Mi cuenta';
-    goTo('portada');
-    document.querySelector('#screen-portada h1').focus();
+    const url = new URL(location.href);
+    let openBooks = url.searchParams.get('vista') === 'libros';
+    try {
+      openBooks ||= sessionStorage.getItem(booksEntryKey) === 'true';
+      sessionStorage.removeItem(booksEntryKey);
+    } catch { /* The link still works without optional session storage. */ }
+    if (url.searchParams.get('vista') === 'libros') {
+      url.searchParams.delete('vista');
+      history.replaceState(history.state, '', url);
+    }
+    const screen = openBooks ? 'libros' : 'portada';
+    goTo(screen);
+    document.querySelector('#screen-' + screen + ' h1').focus();
     void flush();
   }
   function selectMode(next) {
@@ -2435,6 +2448,9 @@ window.addEventListener('resize', () => {
         return;
       }
       const redirectTo = new URL(location.pathname, location.origin).href;
+      if (new URLSearchParams(location.search).get('vista') === 'libros') {
+        try { sessionStorage.setItem(booksEntryKey, 'true'); } catch { /* Use the usual sign-in redirect. */ }
+      }
       const { error } = await client.auth.signInWithOAuth({ provider:'google', options:{ redirectTo } });
       if (error) throw error;
     } catch {
