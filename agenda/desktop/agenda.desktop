@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Agenda
-Comment=Calendario, tareas y notas
-Exec=agenda
-Icon=com.agenda.personal
-Terminal=false
-Categories=Office;Calendar;

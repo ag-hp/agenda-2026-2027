@@ -4,7 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'agenda/web/**'
+      - 'index.html'
+      - 'prueba-cuentas.html'
+      - 'icons/**'
+      - 'manifest.webmanifest'
+      - 'sw.js'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -26,9 +30,10 @@ jobs:
       - uses: actions/configure-pages@v5
       - name: Preparar la portada de la agenda
         run: |
-          cp -R agenda/web _site
-          mv _site/index.html _site/local.html
-          sed 's/Versión de prueba con guardado de notas y eventos por cuenta./Guarda tus notas, eventos y libros en tu cuenta./' agenda/web/prueba-cuentas.html > _site/index.html
+          mkdir -p _site
+          cp -R icons manifest.webmanifest sw.js _site/
+          cp index.html _site/local.html
+          sed 's/Versión de prueba con guardado de notas y eventos por cuenta./Guarda tus notas, eventos y libros en tu cuenta./' prueba-cuentas.html > _site/index.html
           cat > _site/prueba-cuentas.html <<'HTML'
           <!doctype html>
           <html lang="es">
