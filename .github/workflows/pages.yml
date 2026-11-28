@@ -6,6 +6,7 @@ on:
     paths:
       - 'index.html'
       - 'prueba-cuentas.html'
+      - 'portada.css'
       - 'icons/**'
       - 'manifest.webmanifest'
       - 'sw.js'
@@ -31,9 +32,9 @@ jobs:
       - name: Preparar la portada de la agenda
         run: |
           mkdir -p _site
-          cp -R icons manifest.webmanifest sw.js _site/
+          cp -R icons manifest.webmanifest portada.css sw.js _site/
           cp index.html _site/local.html
-          sed 's/Versión de prueba con guardado de notas y eventos por cuenta./Guarda tus notas, eventos y libros en tu cuenta./' prueba-cuentas.html > _site/index.html
+          cp prueba-cuentas.html _site/index.html
           cat > _site/prueba-cuentas.html <<'HTML'
           <!doctype html>
           <html lang="es">
@@ -43,6 +44,7 @@ jobs:
           <a href="./">Abrir la agenda</a>
           </html>
           HTML
+          cp _site/prueba-cuentas.html _site/portada.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
