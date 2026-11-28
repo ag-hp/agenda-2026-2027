@@ -627,6 +627,7 @@
     color:var(--ink); font:inherit;
   }
 </style>
+<link rel="stylesheet" href="./portada.css">
 </head>
 <body><div id="app">
   <!-- PORTADA -->
@@ -695,24 +696,6 @@
   
 .portada-btn:disabled{opacity:1;cursor:default;transform:none}
 
-#app #screen-portada{
-  background:radial-gradient(ellipse at top, #f8dce9, transparent 70%), #fff5f8;
-}
-#app #screen-portada .portada-inner{
-  width:min(100%, 580px); border:1px solid #ead6e0; border-radius:26px;
-  background:#fff radial-gradient(#e9cfdd 1px, transparent 1px) 0 0 / 18px 18px;
-  box-shadow:0 20px 54px rgba(76,36,57,.12);
-}
-#app #screen-portada .portada-title{color:#34222b}
-#app #screen-portada :is(.portada-eyebrow,.portada-sub){color:#735563}
-#app #screen-portada .years{color:#a82e61}
-#app #screen-portada .portada-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#app #screen-portada .portada-btn{
-  min-height:66px;padding:10px;border:1px solid #ead6e0;border-radius:15px;
-  background:#fff5f8;color:#84204a;box-shadow:0 4px 0 #ead6e0;
-}
-#app #screen-portada .portada-btn:first-child{background:#a82e61;color:#fff;border-color:#a82e61}
-@media(max-width:400px){#app #screen-portada .portada-grid{grid-template-columns:1fr}}
 </style>
 </body>
 </html>
